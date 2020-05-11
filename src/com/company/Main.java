@@ -17,6 +17,7 @@ public class Main {
     private static Map<Integer, String> nameAndNumber;
     //Это мапа для хранения предметов
     private static Map<Integer, String> subjectAndNumber;
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         //Три стринги путей к файлам, для проверки можете указать свои пути
@@ -85,28 +86,28 @@ public class Main {
             nameAndSubject2.put(count, Integer.parseInt(str));
         }
         //Объявляем столбы
-        List<String> row1 = Arrays.asList("Rus",
+        List<String> row1 = Arrays.asList(subjectAndNumber.get(1),
                 determineMarks(fullNames.get(1), subjectAndNumber.get(1)),
                 determineMarks(fullNames.get(2), subjectAndNumber.get(1)),
                 determineMarks(fullNames.get(3), subjectAndNumber.get(1)),
                 determineMarks(fullNames.get(4), subjectAndNumber.get(1)),
                 determineMarks(fullNames.get(5), subjectAndNumber.get(1))
         );
-        List<String> row2 = Arrays.asList("Mat",
+        List<String> row2 = Arrays.asList(subjectAndNumber.get(2),
                 determineMarks(fullNames.get(1), subjectAndNumber.get(2)),
                 determineMarks(fullNames.get(2), subjectAndNumber.get(2)),
                 determineMarks(fullNames.get(3), subjectAndNumber.get(2)),
                 determineMarks(fullNames.get(4), subjectAndNumber.get(2)),
                 determineMarks(fullNames.get(5), subjectAndNumber.get(2))
         );
-        List<String> row3 = Arrays.asList("Phy",
+        List<String> row3 = Arrays.asList(subjectAndNumber.get(3),
                 determineMarks(fullNames.get(1), subjectAndNumber.get(3)),
                 determineMarks(fullNames.get(2), subjectAndNumber.get(3)),
                 determineMarks(fullNames.get(3), subjectAndNumber.get(3)),
                 determineMarks(fullNames.get(4), subjectAndNumber.get(3)),
                 determineMarks(fullNames.get(5), subjectAndNumber.get(3))
         );
-        List<String> row4 = Arrays.asList("Lit",
+        List<String> row4 = Arrays.asList(subjectAndNumber.get(4),
                 determineMarks(fullNames.get(1), subjectAndNumber.get(4)),
                 determineMarks(fullNames.get(2), subjectAndNumber.get(4)),
                 determineMarks(fullNames.get(3), subjectAndNumber.get(4)),
@@ -119,10 +120,51 @@ public class Main {
         int spacing = 3;
         //Build таблицы
         printTable(spacing);
-
+        //Получение среднего
+        System.out.println("Ну, что бандит. Оценочки Оценочками, но предмет твой я не знаю, так что скажи мне его.");
+        System.out.println("Чтобы я сказал тебе твой средний балл.");
+        System.out.println("Вот названия предметов: Rus; Math; Phy; Lit");
+        String answer = scanner.nextLine();
+        int commonCount = arrayFileStudent.length;
+        int commonCountDouble = arrayFileStudent.length;
+        switch (answer){
+            case "Rus":
+                System.out.println("Вот тебе твой средний балл.");
+                double averageRus = 0;
+                for(int i = 0; i < commonCount; i++)
+                    averageRus += Double.valueOf(determineMarks(fullNames.get(i+1), subjectAndNumber.get(1)));
+                System.out.println("Rus: "+ averageRus/commonCountDouble);
+                break;
+            case "Math":
+                System.out.println("Вот тебе твой средний балл.");
+                double averageMath = 0;
+                for(int i = 0; i < commonCount; i++)
+                    averageMath += Double.valueOf(determineMarks(fullNames.get(i+1), subjectAndNumber.get(2)));
+                System.out.println("Math: "+ averageMath/commonCountDouble);
+                break;
+            case "Phy":
+                System.out.println("Вот тебе твой средний балл.");
+                double averagePhy = 0;
+                for(int i = 0; i < commonCount; i++)
+                    averagePhy += Double.valueOf(determineMarks(fullNames.get(i+1), subjectAndNumber.get(3)));
+                System.out.println("Phy: "+ averagePhy/commonCountDouble);
+                break;
+            case "Lit":
+                System.out.println("Вот тебе твой средний балл.");
+                double averageLit = 0;
+                for(int i = 0; i < commonCount; i++)
+                    averageLit += Double.valueOf(determineMarks(fullNames.get(i+1), subjectAndNumber.get(4)));
+                System.out.println("Lit: "+ averageLit/commonCountDouble);
+                break;
+            default:
+                System.out.println("Ты что дурак, не знаешь свои предметы");
+                System.out.println("Аааа, запусти програму заново и напиши правильно свой предмет");
+                System.out.println("Пусть это будет для тебя уроком!!!");
+                break;
+        }
     }
     //Функция получения оценок
-    public static String determineMarks(String numOfMan, String numOfSubject){
+    private static String determineMarks(String numOfMan, String numOfSubject){
         final int[] interimName = new int[1];
         final int[] interimSubject = new int[1];
         nameAndNumber.forEach((key, value) -> {
@@ -146,7 +188,7 @@ public class Main {
        return String.valueOf(answer[0]);
     }
     //Поиск первой буквы
-    static char findFirstLetter(String str) {
+    private static char findFirstLetter(String str) {
         for (int i = 0; i < str.length(); i++)
             if (Character.isUpperCase(str.charAt(i)))
                 return str.charAt(i);

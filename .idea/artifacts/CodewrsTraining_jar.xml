@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CodewrsTraining:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CodewrsTraining_jar</output-path>
+    <root id="archive" name="CodewrsTraining.jar">
+      <element id="module-output" name="CodewrsTraining" />
+    </root>
+  </artifact>
+</component>
